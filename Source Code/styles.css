@@ -1,0 +1,140 @@
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --toggle-bg: #343a40;
+    --toggle-fg: #f8f9fa;
+    --transition-speed: 0.4s;
+}
+
+body.dark-mode {
+    --bg-color: #212529;
+    --text-color: #f8f9fa;
+    --toggle-bg: #f8f9fa;
+    --toggle-fg: #343a40;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.toggle-container {
+    position: relative;
+    width: 120px;
+    height: 60px;
+}
+
+.toggle-btn {
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+    background-color: var(--toggle-bg);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color var(--transition-speed) ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-btn:focus {
+    outline: none;
+}
+
+.toggle-icon {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--toggle-fg);
+    transition: all var(--transition-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+body.dark-mode .toggle-icon {
+    left: 70%;
+}
+
+.sun,
+.moon {
+    position: absolute;
+    transition: opacity var(--transition-speed) ease;
+    font-size: 16px;
+    color: var(--toggle-bg);
+}
+
+.sun {
+    opacity: 1;
+}
+
+.moon {
+    opacity: 0;
+}
+
+body.dark-mode .sun {
+    opacity: 0;
+}
+
+body.dark-mode .moon {
+    opacity: 1;
+}
+
+.toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 70px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.toggle-btn:hover::before {
+    opacity: 1;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
